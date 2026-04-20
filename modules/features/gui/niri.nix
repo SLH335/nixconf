@@ -30,8 +30,9 @@
   }: {
     packages.niri = inputs.wrapper-modules.wrappers.niri.wrap {
       inherit pkgs; # THIS PART IS VERY IMPORTAINT!!!
+      v2-settings = true;
       settings = {
-        prefer-no-csd = null;
+        prefer-no-csd = _: {};
         spawn-at-startup = [
           (lib.getExe self'.packages.noctalia)
         ];
@@ -40,8 +41,8 @@
         # connected displays.
         input = {
           touchpad = {
-            natural-scroll = null;
-            tap = null;
+            natural-scroll = _: {};
+            tap = _: {};
           };
 
           keyboard = {
@@ -50,7 +51,7 @@
               options = "caps:escape,lv3:ralt_switch";
             };
           };
-          focus-follows-mouse = null;
+          focus-follows-mouse = _: {};
         };
         cursor = {
           xcursor-theme = "Bibata-Modern-Classic";
@@ -75,58 +76,58 @@
         };
         binds = {
           "Mod+Return".spawn-sh = "${lib.getExe pkgs.ghostty} --gtk-single-instance=true";
-          "Mod+Q".close-window = null;
+          "Mod+Q".close-window = _: {};
           "Mod+F".set-column-width = "100%";
           "Mod+Ctrl+F".set-column-width = "50%";
-          "Mod+Shift+F".fullscreen-window = null;
+          "Mod+Shift+F".fullscreen-window = _: {};
           "Mod+Space".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call launcher toggle";
           "Mod+Semicolon".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call lockScreen lock";
           "Mod+Period".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call controlCenter toggle";
           "Mod+Comma".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call settings toggle";
           "Mod+Ctrl+Alt+Delete".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call sessionMenu toggle";
 
-          "XF86AudioRaiseVolume" = {
-            _attrs.allow-when-locked = true;
-            spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call volume increase";
+          "XF86AudioRaiseVolume" = _: {
+            props.allow-when-locked = true;
+            content.spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call volume increase";
           };
-          "XF86AudioLowerVolume" = {
-            _attrs.allow-when-locked = true;
-            spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call volume decrease";
+          "XF86AudioLowerVolume" = _: {
+            props.allow-when-locked = true;
+            content.spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call volume decrease";
           };
-          "XF86AudioMute" = {
-            _attrs.allow-when-locked = true;
-            spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call volume muteOutput";
+          "XF86AudioMute" = _: {
+            props.allow-when-locked = true;
+            content.spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call volume muteOutput";
           };
-          "XF86AudioMicMute" = {
+          "XF86AudioMicMute" = _: {
             # Mic-mute LED (/sys/class/leds/platform::micmute) is on the
             # audio-micmute trigger, so it auto-follows the PipeWire default
             # source mute state that wpctl (used by noctalia) flips.
-            _attrs.allow-when-locked = true;
-            spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call volume muteInput";
+            props.allow-when-locked = true;
+            content.spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call volume muteInput";
           };
-          "XF86MonBrightnessUp" = {
-            _attrs.allow-when-locked = true;
-            spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call brightness increase";
+          "XF86MonBrightnessUp" = _: {
+            props.allow-when-locked = true;
+            content.spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call brightness increase";
           };
-          "XF86MonBrightnessDown" = {
-            _attrs.allow-when-locked = true;
-            spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call brightness decrease";
+          "XF86MonBrightnessDown" = _: {
+            props.allow-when-locked = true;
+            content.spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call brightness decrease";
           };
 
-          "Mod+Slash".show-hotkey-overlay = null;
-          "Mod+Shift+M".quit = null;
+          "Mod+Slash".show-hotkey-overlay = _: {};
+          "Mod+Shift+M".quit = _: {};
 
           # --- Focus ---
-          "Mod+H".focus-column-left = null;
-          "Mod+L".focus-column-right = null;
-          "Mod+J".focus-window-or-workspace-down = null;
-          "Mod+K".focus-window-or-workspace-up = null;
+          "Mod+H".focus-column-left = _: {};
+          "Mod+L".focus-column-right = _: {};
+          "Mod+J".focus-window-or-workspace-down = _: {};
+          "Mod+K".focus-window-or-workspace-up = _: {};
 
           # --- Move windows ---
-          "Mod+Shift+H".move-column-left = null;
-          "Mod+Shift+L".move-column-right = null;
-          "Mod+Shift+J".move-window-down-or-to-workspace-down = null;
-          "Mod+Shift+K".move-window-up-or-to-workspace-up = null;
+          "Mod+Shift+H".move-column-left = _: {};
+          "Mod+Shift+L".move-column-right = _: {};
+          "Mod+Shift+J".move-window-down-or-to-workspace-down = _: {};
+          "Mod+Shift+K".move-window-up-or-to-workspace-up = _: {};
 
           # --- Switch Workspace ---
           "Mod+1".focus-workspace = 1;
@@ -152,36 +153,36 @@
           "Mod+Shift+9".move-window-to-workspace = 9;
           "Mod+Shift+0".move-window-to-workspace = 10;
 
-          "Mod+Ctrl+H".focus-monitor-left = null;
-          "Mod+Ctrl+J".focus-monitor-down = null;
-          "Mod+Ctrl+K".focus-monitor-up = null;
-          "Mod+Ctrl+L".focus-monitor-right = null;
+          "Mod+Ctrl+H".focus-monitor-left = _: {};
+          "Mod+Ctrl+J".focus-monitor-down = _: {};
+          "Mod+Ctrl+K".focus-monitor-up = _: {};
+          "Mod+Ctrl+L".focus-monitor-right = _: {};
 
-          "Mod+Shift+Ctrl+H".move-workspace-to-monitor-left = null;
-          "Mod+Shift+Ctrl+J".move-workspace-to-monitor-down = null;
-          "Mod+Shift+Ctrl+K".move-workspace-to-monitor-up = null;
-          "Mod+Shift+Ctrl+L".move-workspace-to-monitor-right = null;
+          "Mod+Shift+Ctrl+H".move-workspace-to-monitor-left = _: {};
+          "Mod+Shift+Ctrl+J".move-workspace-to-monitor-down = _: {};
+          "Mod+Shift+Ctrl+K".move-workspace-to-monitor-up = _: {};
+          "Mod+Shift+Ctrl+L".move-workspace-to-monitor-right = _: {};
 
           "Mod+Alt+H".set-column-width = "-5%";
           "Mod+Alt+L".set-column-width = "+5%";
           "Mod+Alt+K".set-window-height = "-5%";
           "Mod+Alt+J".set-window-height = "+5%";
 
-          "Mod+WheelScrollDown".focus-workspace-down = null;
-          "Mod+WheelScrollUp".focus-workspace-up = null;
-          "Mod+Shift+WheelScrollUp".focus-column-left = null;
-          "Mod+Shift+WheelScrollDown".focus-column-right = null;
-          "Mod+Ctrl+WheelScrollUp".focus-monitor-left = null;
-          "Mod+Ctrl+WheelScrollDown".focus-monitor-right = null;
-          "Mod+Ctrl+Shift+WheelScrollUp".focus-monitor-up = null;
-          "Mod+Ctrl+Shift+WheelScrollDown".focus-monitor-down = null;
+          "Mod+WheelScrollDown".focus-workspace-down = _: {};
+          "Mod+WheelScrollUp".focus-workspace-up = _: {};
+          "Mod+Shift+WheelScrollUp".focus-column-left = _: {};
+          "Mod+Shift+WheelScrollDown".focus-column-right = _: {};
+          "Mod+Ctrl+WheelScrollUp".focus-monitor-left = _: {};
+          "Mod+Ctrl+WheelScrollDown".focus-monitor-right = _: {};
+          "Mod+Ctrl+Shift+WheelScrollUp".focus-monitor-up = _: {};
+          "Mod+Ctrl+Shift+WheelScrollDown".focus-monitor-down = _: {};
 
-          "Mod+Tab".toggle-overview = null;
-          "Mod+V".toggle-window-floating = null;
+          "Mod+Tab".toggle-overview = _: {};
+          "Mod+V".toggle-window-floating = _: {};
 
-          "Mod+S".screenshot = null;
-          "Mod+Shift+S".screenshot-screen = null;
-          "Mod+Ctrl+S".screenshot-window = null;
+          "Mod+S".screenshot = _: {};
+          "Mod+Shift+S".screenshot-screen = _: {};
+          "Mod+Ctrl+S".screenshot-window = _: {};
         };
       };
     };
