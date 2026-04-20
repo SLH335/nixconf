@@ -11,6 +11,8 @@
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
 
+    nixpkgs.config.allowUnfree = true;
+
     # Home Manager needs a bit of information about you and the paths it should
     # manage.
     home.username = "slh";
@@ -22,10 +24,16 @@
       signal-desktop
       telegram-desktop
       brave
+      tor-browser
       nerd-fonts.jetbrains-mono
       fastfetch
       pdfarranger
       networkmanagerapplet
+      cursor-cli
+      code-cursor-fhs
+      ngrok
+      pnpm
+      nodejs
     ];
 
     home.sessionVariables = {

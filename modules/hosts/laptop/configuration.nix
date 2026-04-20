@@ -35,7 +35,15 @@
       self.nixosModules.imv
       self.nixosModules.mpv
       self.nixosModules.steam
+
+      self.nixosModules.aws
     ];
+
+    # Enable the GNOME Keyring daemon
+    services.gnome.gnome-keyring.enable = true;
+
+    # Ensure it unlocks when you log in (if you use a display manager)
+    security.pam.services.login.enableGnomeKeyring = true;
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
 
@@ -56,7 +64,7 @@
     users.users.slh = {
       isNormalUser = true;
       description = "SLH";
-      extraGroups = ["wheel" "networkmanager"];
+      extraGroups = ["wheel" "networkmanager" "input"];
       shell = pkgs.zsh;
       home = "/home/slh";
     };

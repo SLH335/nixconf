@@ -39,6 +39,32 @@
         spawn-at-startup = [
           (lib.getExe self'.packages.myNoctalia)
         ];
+        outputs = {
+          # Work setup: two identical LG HDR 4K externals side-by-side on top,
+          # laptop (eDP-1) centered below them. Pinned by serial so the layout
+          # survives DP port swaps between the two externals.
+          "LG Electronics LG HDR 4K 408NTYT1A610" = {
+            scale = 1.25;
+            position._attrs = {
+              x = 0;
+              y = 0;
+            };
+          };
+          "LG Electronics LG HDR 4K 408NTSU1A686" = {
+            scale = 1.25;
+            position._attrs = {
+              x = 3072;
+              y = 0;
+            };
+          };
+          "eDP-1" = {
+            scale = 1.75;
+            position._attrs = {
+              x = 2250;
+              y = 1728;
+            };
+          };
+        };
         input = {
           touchpad = {
             natural-scroll = null;
@@ -51,6 +77,7 @@
               options = "caps:escape,lv3:ralt_switch";
             };
           };
+          focus-follows-mouse = null;
         };
         cursor = {
           xcursor-theme = "Bibata-Modern-Classic";
@@ -81,15 +108,37 @@
           "Mod+Shift+F".fullscreen-window = null;
           "Mod+Space".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
           "Mod+Semicolon".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call lockScreen lock";
-          # "Mod+S".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc controlCenter toggle";
-          # "Mod+Comma".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc settings toggle";
-          # "Mod+Ctrl+Delete".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc sessionMenu toggle";
+          "Mod+Period".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call controlCenter toggle";
+          "Mod+Comma".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call settings toggle";
+          "Mod+Ctrl+Alt+Delete".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call sessionMenu toggle";
 
-          # "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc volume increase";
-          # "XF86AudioLowerVolume".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc volume decrease";
-          # "XF86AudioMute".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc volume muteOutput";
-          # "XF86MonBrightnessUp".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc brightness increase";
-          # "XF86MonBrightnessDown".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc brightness decrease";
+          "XF86AudioRaiseVolume" = {
+            _attrs.allow-when-locked = true;
+            spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume increase";
+          };
+          "XF86AudioLowerVolume" = {
+            _attrs.allow-when-locked = true;
+            spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume decrease";
+          };
+          "XF86AudioMute" = {
+            _attrs.allow-when-locked = true;
+            spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume muteOutput";
+          };
+          "XF86AudioMicMute" = {
+            # Mic-mute LED (/sys/class/leds/platform::micmute) is on the
+            # audio-micmute trigger, so it auto-follows the PipeWire default
+            # source mute state that wpctl (used by noctalia) flips.
+            _attrs.allow-when-locked = true;
+            spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume muteInput";
+          };
+          "XF86MonBrightnessUp" = {
+            _attrs.allow-when-locked = true;
+            spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call brightness increase";
+          };
+          "XF86MonBrightnessDown" = {
+            _attrs.allow-when-locked = true;
+            spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call brightness decrease";
+          };
 
           "Mod+Slash".show-hotkey-overlay = null;
           "Mod+Shift+M".quit = null;
@@ -147,6 +196,12 @@
 
           "Mod+WheelScrollDown".focus-workspace-down = null;
           "Mod+WheelScrollUp".focus-workspace-up = null;
+          "Mod+Shift+WheelScrollUp".focus-column-left = null;
+          "Mod+Shift+WheelScrollDown".focus-column-right = null;
+          "Mod+Ctrl+WheelScrollUp".focus-monitor-left = null;
+          "Mod+Ctrl+WheelScrollDown".focus-monitor-right = null;
+          "Mod+Ctrl+Shift+WheelScrollUp".focus-monitor-up = null;
+          "Mod+Ctrl+Shift+WheelScrollDown".focus-monitor-down = null;
 
           "Mod+Tab".toggle-overview = null;
           "Mod+V".toggle-window-floating = null;
