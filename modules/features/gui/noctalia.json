@@ -343,7 +343,7 @@
       "customLaunchPrefix": "",
       "viewMode": "list",
       "showCategories": true,
-      "iconMode": "tabler",
+      "iconMode": "native",
       "showIconBackground": false,
       "enableSettingsSearch": true,
       "enableWindowsSearch": true,

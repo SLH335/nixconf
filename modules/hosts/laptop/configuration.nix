@@ -20,6 +20,7 @@
       self.nixosModules.nh
 
       self.nixosModules.niri
+      self.nixosModules.noctalia
       self.nixosModules.git
       self.nixosModules.docker
 

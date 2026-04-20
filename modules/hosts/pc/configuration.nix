@@ -18,6 +18,7 @@
       self.nixosModules.home
 
       self.nixosModules.niri
+      self.nixosModules.noctalia
       self.nixosModules.git
 
       self.nixosModules.ghostty
