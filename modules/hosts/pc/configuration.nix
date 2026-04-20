@@ -18,6 +18,7 @@
       self.nixosModules.home
 
       self.nixosModules.niri
+      self.nixosModules.shikane
       self.nixosModules.noctalia
       self.nixosModules.git
 
@@ -69,7 +70,7 @@
     environment.systemPackages = with pkgs; [
       vim
       jdk25
-      nwg-displays
+      wdisplays
       signal-desktop
       nerd-fonts.jetbrains-mono
 

@@ -35,32 +35,9 @@
         spawn-at-startup = [
           (lib.getExe self'.packages.noctalia)
         ];
-        outputs = {
-          # Work setup: two identical LG HDR 4K externals side-by-side on top,
-          # laptop (eDP-1) centered below them. Pinned by serial so the layout
-          # survives DP port swaps between the two externals.
-          "LG Electronics LG HDR 4K 408NTYT1A610" = {
-            scale = 1.25;
-            position._attrs = {
-              x = 0;
-              y = 0;
-            };
-          };
-          "LG Electronics LG HDR 4K 408NTSU1A686" = {
-            scale = 1.25;
-            position._attrs = {
-              x = 3072;
-              y = 0;
-            };
-          };
-          "eDP-1" = {
-            scale = 1.75;
-            position._attrs = {
-              x = 2250;
-              y = 1728;
-            };
-          };
-        };
+        # Outputs are managed by shikane (see modules/features/gui/shikane.nix),
+        # which applies per-location profiles via wlr-output-management on the
+        # connected displays.
         input = {
           touchpad = {
             natural-scroll = null;
