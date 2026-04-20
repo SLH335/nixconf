@@ -10,12 +10,14 @@
     ...
   }: {
     imports = [
+      inputs.nix-index-database.nixosModules.default
       inputs.home-manager.nixosModules.default
       inputs.nvf.nixosModules.default
 
       self.nixosModules.laptopHardwareConfiguration
       self.nixosModules.bootloader
       self.nixosModules.home
+      self.nixosModules.nh
 
       self.nixosModules.niri
       self.nixosModules.git
@@ -46,6 +48,8 @@
     security.pam.services.login.enableGnomeKeyring = true;
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
+
+    programs.nix-index-database.comma.enable = true;
 
     networking.hostName = "slh-laptop"; # Define your hostname.
     networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.

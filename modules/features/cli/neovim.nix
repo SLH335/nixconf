@@ -240,6 +240,8 @@
           ts = {
             enable = true;
           };
+
+          json.enable = true;
         };
         formatter.conform-nvim.enable = true;
       };

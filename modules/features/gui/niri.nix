@@ -3,14 +3,10 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.niri = {
-    pkgs,
-    lib,
-    ...
-  }: {
+  flake.nixosModules.niri = {pkgs, ...}: {
     programs.niri = {
       enable = true;
-      package = self.packages.${pkgs.stdenv.hostPlatform.system}.myNiri;
+      package = self.packages.${pkgs.stdenv.hostPlatform.system}.niri;
     };
 
     home-manager.users.slh = self.homeModules.niri;
@@ -32,12 +28,12 @@
     self',
     ...
   }: {
-    packages.myNiri = inputs.wrapper-modules.wrappers.niri.wrap {
+    packages.niri = inputs.wrapper-modules.wrappers.niri.wrap {
       inherit pkgs; # THIS PART IS VERY IMPORTAINT!!!
       settings = {
         prefer-no-csd = null;
         spawn-at-startup = [
-          (lib.getExe self'.packages.myNoctalia)
+          (lib.getExe self'.packages.noctalia)
         ];
         outputs = {
           # Work setup: two identical LG HDR 4K externals side-by-side on top,
@@ -106,38 +102,38 @@
           "Mod+F".set-column-width = "100%";
           "Mod+Ctrl+F".set-column-width = "50%";
           "Mod+Shift+F".fullscreen-window = null;
-          "Mod+Space".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
-          "Mod+Semicolon".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call lockScreen lock";
-          "Mod+Period".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call controlCenter toggle";
-          "Mod+Comma".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call settings toggle";
-          "Mod+Ctrl+Alt+Delete".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call sessionMenu toggle";
+          "Mod+Space".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call launcher toggle";
+          "Mod+Semicolon".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call lockScreen lock";
+          "Mod+Period".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call controlCenter toggle";
+          "Mod+Comma".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call settings toggle";
+          "Mod+Ctrl+Alt+Delete".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call sessionMenu toggle";
 
           "XF86AudioRaiseVolume" = {
             _attrs.allow-when-locked = true;
-            spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume increase";
+            spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call volume increase";
           };
           "XF86AudioLowerVolume" = {
             _attrs.allow-when-locked = true;
-            spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume decrease";
+            spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call volume decrease";
           };
           "XF86AudioMute" = {
             _attrs.allow-when-locked = true;
-            spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume muteOutput";
+            spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call volume muteOutput";
           };
           "XF86AudioMicMute" = {
             # Mic-mute LED (/sys/class/leds/platform::micmute) is on the
             # audio-micmute trigger, so it auto-follows the PipeWire default
             # source mute state that wpctl (used by noctalia) flips.
             _attrs.allow-when-locked = true;
-            spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume muteInput";
+            spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call volume muteInput";
           };
           "XF86MonBrightnessUp" = {
             _attrs.allow-when-locked = true;
-            spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call brightness increase";
+            spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call brightness increase";
           };
           "XF86MonBrightnessDown" = {
             _attrs.allow-when-locked = true;
-            spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call brightness decrease";
+            spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call brightness decrease";
           };
 
           "Mod+Slash".show-hotkey-overlay = null;
