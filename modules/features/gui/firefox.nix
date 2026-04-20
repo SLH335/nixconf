@@ -43,6 +43,11 @@
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
             private_browsing = true;
           };
+          "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
+            installation_mode = "force_installed";
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/vimium-ff/latest.xpi";
+            private_browsing = true;
+          };
         };
         FirefoxHome = {
           Highlights = false;
