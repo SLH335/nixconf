@@ -17,6 +17,18 @@
       };
     };
 
+    # use delta as git pager/diff
+    programs.delta = {
+      enable = true;
+      enableGitIntegration = true;
+      options = {
+        navigate = true;
+        line-numbers = true;
+        hyperlinks = true;
+        true-color = "always";
+      };
+    };
+
     programs.ssh = {
       matchBlocks."github.com" = {
         user = "git";
