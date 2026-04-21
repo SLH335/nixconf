@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.nh = {pkgs, ...}: {
+  flake.modules.nixos.nh = {pkgs, ...}: {
     environment.systemPackages = [self.packages.${pkgs.stdenv.hostPlatform.system}.nh];
   };
 

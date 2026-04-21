@@ -3,11 +3,11 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.imv = {...}: {
-    home-manager.users.slh = self.homeModules.imv;
+  flake.modules.nixos.imv = {...}: {
+    home-manager.users.slh = self.modules.homeManager.imv;
   };
 
-  flake.homeModules.imv = {...}: {
+  flake.modules.homeManager.imv = {...}: {
     catppuccin.imv.enable = true;
 
     programs.imv = {

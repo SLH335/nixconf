@@ -3,16 +3,16 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.pcConfiguration = {...}: {
+  flake.modules.nixos.pcConfiguration = {...}: {
     imports = [
-      self.nixosModules.pcHardwareConfiguration
+      self.modules.nixos.pcHardwareConfiguration
 
-      self.nixosModules.systemBundle
-      self.nixosModules.desktopBundle
-      self.nixosModules.shellBundle
-      self.nixosModules.appsBundle
-      self.nixosModules.devBundle
-      self.nixosModules.gamingBundle
+      self.modules.nixos.systemBundle
+      self.modules.nixos.desktopBundle
+      self.modules.nixos.shellBundle
+      self.modules.nixos.appsBundle
+      self.modules.nixos.devBundle
+      self.modules.nixos.gamingBundle
     ];
 
     networking.hostName = "slh-pc";

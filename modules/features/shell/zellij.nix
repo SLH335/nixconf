@@ -1,9 +1,9 @@
 {self, ...}: {
-  flake.nixosModules.zellij = {...}: {
-    home-manager.users.slh = self.homeModules.zellij;
+  flake.modules.nixos.zellij = {...}: {
+    home-manager.users.slh = self.modules.homeManager.zellij;
   };
 
-  flake.homeModules.zellij = {...}: {
+  flake.modules.homeManager.zellij = {...}: {
     catppuccin.zellij.enable = true;
 
     programs.zellij = {

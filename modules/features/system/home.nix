@@ -3,15 +3,15 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.home = {
+  flake.modules.nixos.home = {
     imports = [
       inputs.home-manager.nixosModules.default
     ];
 
-    home-manager.users.slh = self.homeModules.home;
+    home-manager.users.slh = self.modules.homeManager.home;
   };
 
-  flake.homeModules.home = {
+  flake.modules.homeManager.home = {
     pkgs,
     inputs,
     ...

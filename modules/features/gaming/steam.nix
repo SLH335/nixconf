@@ -1,5 +1,5 @@
 {...}: {
-  flake.nixosModules.steam = {pkgs, ...}: {
+  flake.modules.nixos.steam = {pkgs, ...}: {
     hardware.graphics.enable = true;
 
     programs = {

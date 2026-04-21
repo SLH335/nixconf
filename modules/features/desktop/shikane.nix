@@ -1,9 +1,9 @@
 {self, ...}: {
-  flake.nixosModules.shikane = {
-    home-manager.users.slh = self.homeModules.shikane;
+  flake.modules.nixos.shikane = {
+    home-manager.users.slh = self.modules.homeManager.shikane;
   };
 
-  flake.homeModules.shikane = {pkgs, ...}: {
+  flake.modules.homeManager.shikane = {pkgs, ...}: {
     home.packages = [pkgs.shikane];
 
     # Shikane picks the first profile whose outputs all match the currently

@@ -1,9 +1,9 @@
 {self, ...}: {
-  flake.nixosModules.yazi = {...}: {
-    home-manager.users.slh = self.homeModules.yazi;
+  flake.modules.nixos.yazi = {...}: {
+    home-manager.users.slh = self.modules.homeManager.yazi;
   };
 
-  flake.homeModules.yazi = {pkgs, ...}: {
+  flake.modules.homeManager.yazi = {pkgs, ...}: {
     catppuccin.yazi.enable = true;
 
     # Install optional tools Yazi relies on for rich previews

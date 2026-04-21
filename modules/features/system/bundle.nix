@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.nixosModules.systemBundle = {
-    imports = with self.nixosModules; [
+  flake.modules.nixos.systemBundle = {
+    imports = with self.modules.nixos; [
       audio
       bluetooth
       bootloader

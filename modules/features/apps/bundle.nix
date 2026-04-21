@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.nixosModules.appsBundle = {
-    imports = with self.nixosModules; [
+  flake.modules.nixos.appsBundle = {
+    imports = with self.modules.nixos; [
       firefox
       imv
       mpv

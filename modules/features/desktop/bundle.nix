@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.nixosModules.desktopBundle = {
-    imports = with self.nixosModules; [
+  flake.modules.nixos.desktopBundle = {
+    imports = with self.modules.nixos; [
       greetd
       niri
       noctalia

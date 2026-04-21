@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  flake.nixosModules.noctalia = {pkgs, ...}: {
+  flake.modules.nixos.noctalia = {pkgs, ...}: {
     environment.systemPackages = [pkgs.papirus-icon-theme];
   };
 

@@ -1,9 +1,9 @@
 {self, ...}: {
-  flake.nixosModules.atuin = {...}: {
-    home-manager.users.slh = self.homeModules.atuin;
+  flake.modules.nixos.atuin = {...}: {
+    home-manager.users.slh = self.modules.homeManager.atuin;
   };
 
-  flake.homeModules.atuin = {...}: {
+  flake.modules.homeManager.atuin = {...}: {
     catppuccin.atuin.enable = true;
 
     programs.atuin = {

@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.nixosModules.shellBundle = {
-    imports = with self.nixosModules; [
+  flake.modules.nixos.shellBundle = {
+    imports = with self.modules.nixos; [
       atuin
       btop
       cli

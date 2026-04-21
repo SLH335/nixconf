@@ -3,11 +3,11 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.mpv = {
-    home-manager.users.slh = self.homeModules.mpv;
+  flake.modules.nixos.mpv = {
+    home-manager.users.slh = self.modules.homeManager.mpv;
   };
 
-  flake.homeModules.mpv = {
+  flake.modules.homeManager.mpv = {
     catppuccin.mpv.enable = true;
 
     programs.mpv = {

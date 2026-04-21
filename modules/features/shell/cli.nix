@@ -1,9 +1,9 @@
 {self, ...}: {
-  flake.nixosModules.cli = {...}: {
-    home-manager.users.slh = self.homeModules.cli;
+  flake.modules.nixos.cli = {...}: {
+    home-manager.users.slh = self.modules.homeManager.cli;
   };
 
-  flake.homeModules.cli = {pkgs, ...}: {
+  flake.modules.homeManager.cli = {pkgs, ...}: {
     catppuccin.bat.enable = true;
     catppuccin.lsd.enable = true;
 

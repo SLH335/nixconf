@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.nixosModules.gamingBundle = {
-    imports = with self.nixosModules; [
+  flake.modules.nixos.gamingBundle = {
+    imports = with self.modules.nixos; [
       steam
     ];
   };

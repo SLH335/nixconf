@@ -1,11 +1,11 @@
 {self, ...}: {
-  flake.nixosModules.git = {pkgs, ...}: {
+  flake.modules.nixos.git = {pkgs, ...}: {
     environment.systemPackages = [pkgs.git];
 
-    home-manager.users.slh = self.homeModules.git;
+    home-manager.users.slh = self.modules.homeManager.git;
   };
 
-  flake.homeModules.git = {...}: {
+  flake.modules.homeManager.git = {...}: {
     catppuccin.delta.enable = true;
 
     programs.git = {

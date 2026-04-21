@@ -1,5 +1,5 @@
 {...}: {
-  flake.nixosModules.wayland = {pkgs, ...}: {
+  flake.modules.nixos.wayland = {pkgs, ...}: {
     environment.systemPackages = with pkgs; [
       wdisplays
     ];

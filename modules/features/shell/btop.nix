@@ -1,9 +1,9 @@
 {self, ...}: {
-  flake.nixosModules.btop = {
-    home-manager.users.slh = self.homeModules.btop;
+  flake.modules.nixos.btop = {
+    home-manager.users.slh = self.modules.homeManager.btop;
   };
 
-  flake.homeModules.btop = {
+  flake.modules.homeManager.btop = {
     catppuccin.btop.enable = true;
 
     programs.btop = {

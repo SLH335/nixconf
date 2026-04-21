@@ -1,11 +1,11 @@
 {self, ...}: {
-  flake.nixosModules.firefox = {pkgs, ...}: {
+  flake.modules.nixos.firefox = {pkgs, ...}: {
     environment.systemPackages = [pkgs.firefox];
 
-    home-manager.users.slh = self.homeModules.firefox;
+    home-manager.users.slh = self.modules.homeManager.firefox;
   };
 
-  flake.homeModules.firefox = {pkgs, ...}: {
+  flake.modules.homeManager.firefox = {pkgs, ...}: {
     programs.firefox = {
       enable = true;
       policies = {

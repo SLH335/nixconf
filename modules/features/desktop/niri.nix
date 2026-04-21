@@ -3,16 +3,16 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.niri = {pkgs, ...}: {
+  flake.modules.nixos.niri = {pkgs, ...}: {
     programs.niri = {
       enable = true;
       package = self.packages.${pkgs.stdenv.hostPlatform.system}.niri;
     };
 
-    home-manager.users.slh = self.homeModules.niri;
+    home-manager.users.slh = self.modules.homeManager.niri;
   };
 
-  flake.homeModules.niri = {pkgs, ...}: {
+  flake.modules.homeManager.niri = {pkgs, ...}: {
     home.pointerCursor = {
       gtk.enable = true;
       x11.enable = true;

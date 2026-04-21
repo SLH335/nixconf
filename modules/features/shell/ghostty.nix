@@ -3,8 +3,8 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.ghostty = {...}: {
-    home-manager.users.slh = self.homeModules.ghostty;
+  flake.modules.nixos.ghostty = {...}: {
+    home-manager.users.slh = self.modules.homeManager.ghostty;
 
     systemd.user.services.ghostty = {
       enable = true;
@@ -12,7 +12,7 @@
     };
   };
 
-  flake.homeModules.ghostty = {...}: {
+  flake.modules.homeManager.ghostty = {...}: {
     catppuccin.ghostty.enable = true;
 
     programs.ghostty = {

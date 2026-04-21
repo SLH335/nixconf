@@ -1,5 +1,5 @@
 {...}: {
-  flake.nixosModules.pcHardwareConfiguration = {
+  flake.modules.nixos.pcHardwareConfiguration = {
     config,
     lib,
     pkgs,

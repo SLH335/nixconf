@@ -1,9 +1,9 @@
 {self, ...}: {
-  flake.nixosModules.zoxide = {...}: {
-    home-manager.users.slh = self.homeModules.zoxide;
+  flake.modules.nixos.zoxide = {...}: {
+    home-manager.users.slh = self.modules.homeManager.zoxide;
   };
 
-  flake.homeModules.zoxide = {...}: {
+  flake.modules.homeManager.zoxide = {...}: {
     programs.zoxide = {
       enable = true;
 

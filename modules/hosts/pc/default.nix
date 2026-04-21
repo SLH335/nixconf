@@ -5,7 +5,7 @@
 }: {
   flake.nixosConfigurations.slh-pc = inputs.nixpkgs.lib.nixosSystem {
     modules = [
-      self.nixosModules.pcConfiguration
+      self.modules.nixos.pcConfiguration
     ];
   };
 }

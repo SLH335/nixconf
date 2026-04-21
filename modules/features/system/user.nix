@@ -1,5 +1,5 @@
 {...}: {
-  flake.nixosModules.user = {pkgs, ...}: {
+  flake.modules.nixos.user = {pkgs, ...}: {
     users.users.slh = {
       isNormalUser = true;
       description = "SLH";
