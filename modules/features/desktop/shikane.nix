@@ -29,7 +29,7 @@
       # position = "2560,0"
       # scale = 1.0
 
-      # --- Laptop at work: two LG 4K + eDP-1 centered below ---
+      # --- Laptop at work: two LG 4K + internal centered below ---
       [[profile]]
       name = "laptop-work"
 
@@ -51,25 +51,25 @@
       position = "2250,1728"
       scale = 1.75
 
-      # --- Laptop at home: two externals, internal off ---
-      # [[profile]]
-      # name = "laptop-home"
-      #
-      # [[profile.output]]
-      # search = ["s=HOME_LEFT_SERIAL"]
-      # enable = true
-      # position = "0,0"
-      # scale = 1.0
-      #
-      # [[profile.output]]
-      # search = ["s=HOME_RIGHT_SERIAL"]
-      # enable = true
-      # position = "1920,0"
-      # scale = 1.0
-      #
-      # [[profile.output]]
-      # search = ["n=eDP-1"]
-      # enable = false
+      # --- Laptop at home: MSI (left) + LG ultrawide (right), internal off ---
+      [[profile]]
+      name = "laptop-home"
+
+      [[profile.output]]
+      search = ["s=CD9M024401566"]
+      enable = true
+      position = "0,0"
+      scale = 1.0
+
+      [[profile.output]]
+      search = ["s=204NTMXB9739"]
+      enable = true
+      position = "2560,0"
+      scale = 1.0
+
+      [[profile.output]]
+      search = ["n=eDP-1"]
+      enable = false
 
       # --- Laptop alone: only internal panel ---
       [[profile]]
