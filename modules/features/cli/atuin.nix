@@ -4,6 +4,8 @@
   };
 
   flake.homeModules.atuin = {...}: {
+    catppuccin.atuin.enable = true;
+
     programs.atuin = {
       enable = true;
       enableZshIntegration = true;

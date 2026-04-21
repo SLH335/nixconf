@@ -4,6 +4,8 @@
   };
 
   flake.homeModules.btop = {
+    catppuccin.btop.enable = true;
+
     programs.btop = {
       enable = true;
 

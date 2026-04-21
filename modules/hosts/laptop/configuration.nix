@@ -18,6 +18,7 @@
       self.nixosModules.bootloader
       self.nixosModules.home
       self.nixosModules.nh
+      self.nixosModules.theme
 
       self.nixosModules.niri
       self.nixosModules.shikane

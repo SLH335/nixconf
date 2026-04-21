@@ -6,6 +6,8 @@
   };
 
   flake.homeModules.git = {...}: {
+    catppuccin.delta.enable = true;
+
     programs.git = {
       enable = true;
 

@@ -4,6 +4,9 @@
   };
 
   flake.homeModules.cli = {pkgs, ...}: {
+    catppuccin.bat.enable = true;
+    catppuccin.lsd.enable = true;
+
     home.packages = with pkgs; [
       wget
       ripgrep
@@ -14,12 +17,7 @@
       trashy
     ];
 
-    programs.bat = {
-      enable = true;
-      config = {
-        theme = "Catppuccin Mocha";
-      };
-    };
+    programs.bat.enable = true;
 
     programs.lsd = {
       enable = true;

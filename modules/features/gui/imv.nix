@@ -8,14 +8,13 @@
   };
 
   flake.homeModules.imv = {...}: {
+    catppuccin.imv.enable = true;
+
     programs.imv = {
       enable = true;
 
       settings = {
         options = {
-          # Match your Catppuccin Mocha background
-          background = "1e1e2e";
-          # Start in fullscreen if you prefer
           fullscreen = false;
           # Disable the bottom text overlay for ultimate minimalism
           overlay = false;

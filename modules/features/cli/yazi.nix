@@ -4,6 +4,8 @@
   };
 
   flake.homeModules.yazi = {pkgs, ...}: {
+    catppuccin.yazi.enable = true;
+
     # Install optional tools Yazi relies on for rich previews
     home.packages = with pkgs; [
       ffmpegthumbnailer # Video thumbnails

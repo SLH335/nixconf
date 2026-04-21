@@ -13,6 +13,8 @@
   };
 
   flake.homeModules.ghostty = {...}: {
+    catppuccin.ghostty.enable = true;
+
     programs.ghostty = {
       enable = true;
 
@@ -21,7 +23,6 @@
 
       # This creates $XDG_CONFIG_HOME/ghostty/config
       settings = {
-        theme = "Catppuccin Mocha";
         font-family = "JetBrainsMono Nerd Font";
         font-size = 14;
         window-padding-x = 10;

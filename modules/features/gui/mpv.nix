@@ -8,6 +8,8 @@
   };
 
   flake.homeModules.mpv = {
+    catppuccin.mpv.enable = true;
+
     programs.mpv = {
       enable = true;
 
@@ -64,9 +66,6 @@
         "f" = "cycle fullscreen";
       };
     };
-
-    # Optional: If you are using the catppuccin/nix flake
-    # catppuccin.mpv.enable = true;
 
     xdg.mimeApps.defaultApplications = {
       "video/mp4" = "mpv.desktop";
