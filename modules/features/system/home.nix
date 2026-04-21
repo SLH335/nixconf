@@ -1,5 +1,13 @@
-{self, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   flake.nixosModules.home = {
+    imports = [
+      inputs.home-manager.nixosModules.default
+    ];
+
     home-manager.users.slh = self.homeModules.home;
   };
 
