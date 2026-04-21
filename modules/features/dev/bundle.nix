@@ -6,6 +6,7 @@
       git
       java
       neovim
+      squeak
     ];
   };
 }
