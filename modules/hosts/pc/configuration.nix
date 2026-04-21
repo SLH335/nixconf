@@ -20,6 +20,7 @@
       self.nixosModules.niri
       self.nixosModules.shikane
       self.nixosModules.noctalia
+      self.nixosModules.greetd
       self.nixosModules.git
 
       self.nixosModules.ghostty
@@ -116,6 +117,11 @@
     # List services that you want to enable:
 
     services.upower.enable = true;
+
+    services.greetd.settings.initial_session = {
+      command = "niri-session";
+      user = "slh";
+    };
 
     # services.flatpak.enable = true;
 

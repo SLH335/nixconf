@@ -22,6 +22,7 @@
       self.nixosModules.niri
       self.nixosModules.shikane
       self.nixosModules.noctalia
+      self.nixosModules.greetd
       self.nixosModules.git
       self.nixosModules.docker
 
