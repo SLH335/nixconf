@@ -241,7 +241,7 @@
           python.enable = true;
 
           # Typescript / React
-          ts = {
+          typescript = {
             enable = true;
           };
 
