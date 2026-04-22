@@ -4,9 +4,9 @@
       aws
       docker
       git
-      java
       neovim
       squeak
+      devTools
     ];
   };
 }

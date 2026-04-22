@@ -1,8 +1,4 @@
-{
-  self,
-  inputs,
-  ...
-}: {
+{self, ...}: {
   flake.modules.nixos.pcConfiguration = {...}: {
     imports = [
       self.modules.nixos.pcHardwareConfiguration

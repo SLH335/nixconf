@@ -8,26 +8,19 @@
       inputs.home-manager.nixosModules.default
     ];
 
-    home-manager.users.slh = self.modules.homeManager.home;
+    home-manager = {
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      users.slh = self.modules.homeManager.home;
+    };
   };
 
-  flake.modules.homeManager.home = {
-    pkgs,
-    inputs,
-    ...
-  }: {
-    # Let Home Manager install and manage itself.
+  flake.modules.homeManager.home = {pkgs, ...}: {
     programs.home-manager.enable = true;
 
-    nixpkgs.config.allowUnfree = true;
-
-    # Home Manager needs a bit of information about you and the paths it should
-    # manage.
     home.username = "slh";
     home.homeDirectory = "/home/slh";
 
-    # The home.packages option allows you to install Nix packages into your
-    # environment.
     home.packages = with pkgs; [
       signal-desktop
       telegram-desktop
@@ -37,11 +30,6 @@
       fastfetch
       pdfarranger
       networkmanagerapplet
-      cursor-cli
-      code-cursor-fhs
-      ngrok
-      pnpm
-      nodejs
     ];
 
     home.sessionVariables = {

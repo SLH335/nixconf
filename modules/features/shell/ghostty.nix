@@ -1,8 +1,4 @@
-{
-  self,
-  inputs,
-  ...
-}: {
+{self, ...}: {
   flake.modules.nixos.ghostty = {...}: {
     home-manager.users.slh = self.modules.homeManager.ghostty;
 

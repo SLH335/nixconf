@@ -4,6 +4,7 @@
       loader.systemd-boot = {
         enable = true;
         consoleMode = "max";
+        configurationLimit = 20;
       };
       loader.efi.canTouchEfiVariables = true;
       plymouth = {

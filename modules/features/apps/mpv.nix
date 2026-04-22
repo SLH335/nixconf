@@ -1,8 +1,4 @@
-{
-  self,
-  inputs,
-  ...
-}: {
+{self, ...}: {
   flake.modules.nixos.mpv = {
     home-manager.users.slh = self.modules.homeManager.mpv;
   };
