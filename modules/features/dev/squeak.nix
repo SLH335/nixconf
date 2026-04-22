@@ -48,6 +48,7 @@
           libgit2
           cacert
           openssh
+          openssl
           git
         ];
     };

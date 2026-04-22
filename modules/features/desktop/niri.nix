@@ -33,6 +33,7 @@
       v2-settings = true;
       settings = {
         prefer-no-csd = _: {};
+        hotkey-overlay.skip-at-startup = _: {};
         spawn-at-startup = [
           (lib.getExe self'.packages.noctalia)
         ];
