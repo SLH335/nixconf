@@ -79,6 +79,10 @@
         git_branch = {
           format = "[$symbol$branch(:$remote_branch)]($style) ";
         };
+
+        aws = {
+          disabled = true;
+        };
       };
     };
   };
