@@ -25,6 +25,7 @@
   perSystem = {
     pkgs,
     lib,
+    config,
     self',
     ...
   }: {
@@ -85,7 +86,63 @@
           "Mod+Semicolon".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call lockScreen lock";
           "Mod+Period".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call controlCenter toggle";
           "Mod+Comma".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call settings toggle";
+          "Mod+N".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call notifications toggleHistory";
           "Mod+Ctrl+Alt+Delete".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call sessionMenu toggle";
+          "Mod+Slash".spawn-sh = let
+            noctalia = lib.getExe self'.packages.noctalia;
+          in
+            self.mkWhichKeyExe pkgs [
+              {
+                key = "w";
+                desc = "WiFi";
+                cmd = "${noctalia} ipc call network togglePanel";
+              }
+              {
+                key = "v";
+                desc = "Volume";
+                cmd = "${noctalia} ipc call volume togglePanel";
+              }
+              {
+                key = "f";
+                desc = "Firefox";
+                cmd = lib.getExe pkgs.firefox;
+              }
+              {
+                key = "b";
+                desc = "Brave";
+                cmd = lib.getExe pkgs.brave;
+              }
+              {
+                key = "B";
+                desc = "Bluetooth";
+                cmd = "${noctalia} ipc call bluetooth togglePanel";
+              }
+              {
+                key = "s";
+                desc = "Signal";
+                cmd = lib.getExe pkgs.signal-desktop;
+              }
+              {
+                key = "t";
+                desc = "Telegram";
+                cmd = lib.getExe pkgs.telegram-desktop;
+              }
+              {
+                key = "m";
+                desc = "btop";
+                cmd = "${lib.getExe pkgs.ghostty} -e ${lib.getExe pkgs.btop}";
+              }
+              {
+                key = "S";
+                desc = "Steam";
+                cmd = lib.getExe pkgs.steam;
+              }
+              {
+                key = "T";
+                desc = "Tor";
+                cmd = lib.getExe pkgs.tor-browser;
+              }
+            ];
 
           "XF86AudioRaiseVolume" = _: {
             props.allow-when-locked = true;
@@ -115,7 +172,7 @@
             content.spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call brightness decrease";
           };
 
-          "Mod+Slash".show-hotkey-overlay = _: {};
+          "Mod+Shift+Slash".show-hotkey-overlay = _: {};
           "Mod+Shift+M".quit = _: {};
 
           # --- Focus ---

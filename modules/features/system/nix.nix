@@ -17,4 +17,15 @@
 
     programs.nix-index-database.comma.enable = true;
   };
+
+  # flake-parts instantiates its own `pkgs` for `perSystem`, separate from the
+  # NixOS `pkgs`, so `nixpkgs.config.allowUnfree` set above does not apply to
+  # wrapper packages built in `perSystem`. Re-import nixpkgs with unfree
+  # allowed so wrappers can reference unfree pkgs (steam, etc.).
+  perSystem = {system, ...}: {
+    _module.args.pkgs = import inputs.nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
+  };
 }
