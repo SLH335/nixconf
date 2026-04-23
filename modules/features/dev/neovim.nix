@@ -216,6 +216,14 @@
           otter-nvim.enable = true;
 
           formatOnSave = true;
+
+          mappings = {
+            goToDefinition = "<leader>gd";
+            goToDeclaration = "<leader>gD";
+            goToType = "<leader>gt";
+            listImplementations = "<leader>gi";
+            listReferences = "<leader>gr";
+          };
         };
         languages = {
           enableTreesitter = true;
