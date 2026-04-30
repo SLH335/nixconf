@@ -14,20 +14,20 @@
     # convention as niri's native `output { position ... }`.
     xdg.configFile."shikane/config.toml".text = ''
       # --- Desktop (slh-pc): two monitors ---
-      # [[profile]]
-      # name = "desktop"
-      #
-      # [[profile.output]]
-      # search = ["s=DESKTOP_LEFT_SERIAL"]
-      # enable = true
-      # position = "0,0"
-      # scale = 1.0
-      #
-      # [[profile.output]]
-      # search = ["s=DESKTOP_RIGHT_SERIAL"]
-      # enable = true
-      # position = "2560,0"
-      # scale = 1.0
+      [[profile]]
+      name = "desktop"
+
+      [[profile.output]]
+      search = ["s=CD9M024401566"]
+      enable = true
+      position = "0,0"
+      scale = 1.0
+
+      [[profile.output]]
+      search = ["s=204NTMXB9739"]
+      enable = true
+      position = "2560,0"
+      scale = 1.0
 
       # --- Laptop at work: two LG 4K + internal centered below ---
       [[profile]]

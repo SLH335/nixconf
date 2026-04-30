@@ -13,6 +13,8 @@
       packages
       power
       user
+      openrgb
+      ssh
     ];
   };
 }

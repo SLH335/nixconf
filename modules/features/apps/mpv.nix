@@ -4,8 +4,6 @@
   };
 
   flake.modules.homeManager.mpv = {
-    catppuccin.mpv.enable = true;
-
     programs.mpv = {
       enable = true;
 
@@ -23,10 +21,6 @@
 
         # Don't close the window instantly when the video finishes playing
         keep-open = "yes";
-
-        # Remove the default clunky UI (useful if you want to use modern
-        # third-party OSCs like 'uosc', or just want it completely minimal)
-        # osc = "no";
 
         # Save video position on quit
         save-position-on-quit = "yes";

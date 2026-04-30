@@ -55,7 +55,7 @@
           SponsoredStories = false;
           SponsoredTopSites = false;
           Stories = false;
-          TopSites = true;
+          TopSites = false;
         };
         FirefoxSuggest = {
           ImproveSuggest = false;
