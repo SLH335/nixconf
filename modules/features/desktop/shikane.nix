@@ -71,6 +71,22 @@
       search = ["n=eDP-1"]
       enable = false
 
+      # --- Laptop with HP Z24i G2 (right), internal on the left ---
+      [[profile]]
+      name = "laptop-hp"
+
+      [[profile.output]]
+      search = ["s=6CM85116G9"]
+      enable = true
+      position = "1646,0"
+      scale = 1.0
+
+      [[profile.output]]
+      search = ["n=eDP-1"]
+      enable = true
+      position = "0,171"
+      scale = 1.75
+
       # --- Laptop alone: only internal panel ---
       [[profile]]
       name = "laptop-alone"
