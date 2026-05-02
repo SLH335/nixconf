@@ -1,4 +1,8 @@
-{self, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   flake.modules.nixos.apps = {
     home-manager.users.slh = self.modules.homeManager.apps;
   };
@@ -8,6 +12,9 @@
       zathura
       grayjay
       gimp
+      libqalculate
+      picard
+      inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
 }
