@@ -1,10 +1,14 @@
 {...}: {
-  flake.modules.nixos.docker = {pkgs, ...}: {
+  flake.modules.nixos.docker = {
+    pkgs,
+    config,
+    ...
+  }: {
     virtualisation.docker = {
       enable = true;
       storageDriver = "btrfs";
     };
 
-    users.users.slh.extraGroups = ["docker"];
+    users.users.${config.slh.primaryUser}.extraGroups = ["docker"];
   };
 }

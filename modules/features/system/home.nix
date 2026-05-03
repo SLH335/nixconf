@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-  flake.modules.nixos.home = {
+  flake.modules.nixos.home = {config, ...}: {
     imports = [
       inputs.home-manager.nixosModules.default
     ];
@@ -11,30 +11,15 @@
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      users.slh = self.modules.homeManager.home;
+      users.${config.slh.primaryUser} = self.modules.homeManager.home;
     };
   };
 
   flake.modules.homeManager.home = {pkgs, ...}: {
     programs.home-manager.enable = true;
 
-    home.username = "slh";
-    home.homeDirectory = "/home/slh";
-
-    home.packages = with pkgs; [
-      signal-desktop
-      telegram-desktop
-      brave
-      tor-browser
-      nerd-fonts.jetbrains-mono
-      fastfetch
-      pdfarranger
-      networkmanagerapplet
-    ];
-
-    home.sessionVariables = {
-      EDITOR = "nvim";
-    };
+    # home.username and home.homeDirectory are auto-derived by
+    # home-manager from the users.<name> binding above.
 
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release

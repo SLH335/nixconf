@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.nixos.ssh = {...}: {
+  flake.modules.nixos.ssh = {config, ...}: {
     services.openssh = {
       enable = true;
       ports = [5432];
@@ -7,7 +7,7 @@
         PasswordAuthentication = false;
         KbdInteractiveAuthentication = false;
         PermitRootLogin = "no";
-        AllowUsers = ["slh"];
+        AllowUsers = [config.slh.primaryUser];
       };
     };
   };

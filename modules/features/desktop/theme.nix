@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-  flake.modules.nixos.theme = {
+  flake.modules.nixos.theme = {config, ...}: {
     imports = [
       inputs.catppuccin.nixosModules.catppuccin
     ];
@@ -15,7 +15,7 @@
 
     catppuccin.tty.enable = true;
 
-    home-manager.users.slh = self.modules.homeManager.theme;
+    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.theme;
   };
 
   flake.modules.homeManager.theme = {

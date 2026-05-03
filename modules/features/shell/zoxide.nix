@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.modules.nixos.zoxide = {...}: {
-    home-manager.users.slh = self.modules.homeManager.zoxide;
+  flake.modules.nixos.zoxide = {config, ...}: {
+    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.zoxide;
   };
 
   flake.modules.homeManager.zoxide = {...}: {

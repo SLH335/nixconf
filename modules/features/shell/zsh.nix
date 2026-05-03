@@ -1,11 +1,11 @@
 {self, ...}: {
-  flake.modules.nixos.shell = {...}: {
+  flake.modules.nixos.zsh = {config, ...}: {
     programs.zsh.enable = true;
 
-    home-manager.users.slh = self.modules.homeManager.shell;
+    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.zsh;
   };
 
-  flake.modules.homeManager.shell = {
+  flake.modules.homeManager.zsh = {
     pkgs,
     config,
     ...

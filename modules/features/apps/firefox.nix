@@ -1,8 +1,12 @@
 {self, ...}: {
-  flake.modules.nixos.firefox = {pkgs, ...}: {
-    environment.systemPackages = [pkgs.firefox];
+  flake.modules.nixos.firefox = {
+    pkgs,
+    config,
+    ...
+  }: {
+    # environment.systemPackages = [pkgs.firefox];
 
-    home-manager.users.slh = self.modules.homeManager.firefox;
+    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.firefox;
   };
 
   flake.modules.homeManager.firefox = {
@@ -42,7 +46,6 @@
             installation_mode = "force_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
             private_browsing = true;
-            default_area = "navbar";
           };
           # Bitwarden
           "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {

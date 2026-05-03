@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.modules.nixos.shikane = {
-    home-manager.users.slh = self.modules.homeManager.shikane;
+  flake.modules.nixos.shikane = {config, ...}: {
+    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.shikane;
   };
 
   flake.modules.homeManager.shikane = {pkgs, ...}: {

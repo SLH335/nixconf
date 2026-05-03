@@ -3,8 +3,8 @@
   inputs,
   ...
 }: {
-  flake.modules.nixos.apps = {
-    home-manager.users.slh = self.modules.homeManager.apps;
+  flake.modules.nixos.apps = {config, ...}: {
+    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.apps;
   };
 
   flake.modules.homeManager.apps = {pkgs, ...}: {
@@ -12,8 +12,15 @@
       zathura
       grayjay
       gimp
-      libqalculate
       picard
+      signal-desktop
+      telegram-desktop
+      brave
+      tor-browser
+      nerd-fonts.jetbrains-mono
+      pdfarranger
+      networkmanagerapplet
+
       inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };

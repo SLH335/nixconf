@@ -1,15 +1,12 @@
 {self, ...}: {
-  flake.modules.nixos.laptopConfiguration = {...}: {
+  flake.modules.nixos.serverConfiguration = {...}: {
     imports = [
-      self.modules.nixos.laptopHardwareConfiguration
+      self.modules.nixos.serverHardwareConfiguration
 
-      self.modules.nixos.desktopModules
-
-      self.modules.nixos.bluetooth
-      self.modules.nixos.power
+      self.modules.nixos.serverModules
     ];
 
-    networking.hostName = "slh-laptop";
+    networking.hostName = "networking";
 
     # This option defines the first version of NixOS you have installed on this particular machine,
     # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

@@ -1,21 +1,16 @@
 {self, ...}: {
-  flake.modules.nixos.pcConfiguration = {...}: {
+  flake.modules.nixos.pcConfiguration = {config, ...}: {
     imports = [
       self.modules.nixos.pcHardwareConfiguration
 
-      self.modules.nixos.systemBundle
-      self.modules.nixos.desktopBundle
-      self.modules.nixos.shellBundle
-      self.modules.nixos.appsBundle
-      self.modules.nixos.devBundle
-      self.modules.nixos.gamingBundle
+      self.modules.nixos.desktopModules
     ];
 
     networking.hostName = "slh-pc";
 
     services.greetd.settings.initial_session = {
       command = "niri-session";
-      user = "slh";
+      user = config.slh.primaryUser;
     };
 
     # This option defines the first version of NixOS you have installed on this particular machine,

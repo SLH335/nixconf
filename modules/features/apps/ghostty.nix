@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.modules.nixos.ghostty = {...}: {
-    home-manager.users.slh = self.modules.homeManager.ghostty;
+  flake.modules.nixos.ghostty = {config, ...}: {
+    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.ghostty;
 
     systemd.user.services.ghostty = {
       enable = true;

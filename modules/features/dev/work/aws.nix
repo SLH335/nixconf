@@ -1,5 +1,5 @@
 {...}: {
-  flake.modules.nixos.aws = {pkgs, ...}: let
+  flake.modules.nixos.dev-work = {pkgs, ...}: let
     aws-runas = pkgs.buildGoModule rec {
       pname = "aws-runas";
       version = "3.7.0"; # Latest version as of current writing

@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.modules.nixos.cli = {...}: {
-    home-manager.users.slh = self.modules.homeManager.cli;
+  flake.modules.nixos.cli = {config, ...}: {
+    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.cli;
   };
 
   flake.modules.homeManager.cli = {pkgs, ...}: {
@@ -15,6 +15,8 @@
       prettyping
       wl-clipboard
       trashy
+      libqalculate
+      fastfetch
     ];
 
     programs.bat.enable = true;

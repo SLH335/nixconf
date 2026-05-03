@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.modules.nixos.devTools = {
-    home-manager.users.slh = self.modules.homeManager.devTools;
+  flake.modules.nixos.devTools = {config, ...}: {
+    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.devTools;
   };
 
   flake.modules.homeManager.devTools = {pkgs, ...}: {

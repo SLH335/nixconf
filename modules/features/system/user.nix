@@ -1,11 +1,15 @@
 {...}: {
-  flake.modules.nixos.user = {pkgs, ...}: {
-    users.users.slh = {
+  flake.modules.nixos.user = {
+    pkgs,
+    config,
+    ...
+  }: {
+    users.users.${config.slh.primaryUser} = {
       isNormalUser = true;
       description = "SLH";
       extraGroups = ["wheel" "networkmanager" "input"];
       shell = pkgs.zsh;
-      home = "/home/slh";
+      # home defaults to /home/<name>; no need to set it explicitly.
     };
   };
 }

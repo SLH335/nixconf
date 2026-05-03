@@ -3,13 +3,17 @@
   inputs,
   ...
 }: {
-  flake.modules.nixos.niri = {pkgs, ...}: {
+  flake.modules.nixos.niri = {
+    pkgs,
+    config,
+    ...
+  }: {
     programs.niri = {
       enable = true;
       package = self.packages.${pkgs.stdenv.hostPlatform.system}.niri;
     };
 
-    home-manager.users.slh = self.modules.homeManager.niri;
+    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.niri;
   };
 
   flake.modules.homeManager.niri = {pkgs, ...}: {
@@ -87,6 +91,7 @@
           "Mod+Period".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call controlCenter toggle";
           "Mod+Comma".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call settings toggle";
           "Mod+N".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call notifications toggleHistory";
+          "Mod+M".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call media toggle";
           "Mod+Ctrl+Alt+Delete".spawn-sh = "${lib.getExe self'.packages.noctalia} ipc call sessionMenu toggle";
           "Mod+Slash".spawn-sh = let
             noctalia = lib.getExe self'.packages.noctalia;

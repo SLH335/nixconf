@@ -1,8 +1,12 @@
 {self, ...}: {
-  flake.modules.nixos.git = {pkgs, ...}: {
+  flake.modules.nixos.git = {
+    pkgs,
+    config,
+    ...
+  }: {
     environment.systemPackages = [pkgs.git];
 
-    home-manager.users.slh = self.modules.homeManager.git;
+    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.git;
   };
 
   flake.modules.homeManager.git = {...}: {
