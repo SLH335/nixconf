@@ -5,14 +5,21 @@
     home-manager.users.slh = self.modules.homeManager.firefox;
   };
 
-  flake.modules.homeManager.firefox = {pkgs, ...}: {
+  flake.modules.homeManager.firefox = {
+    pkgs,
+    config,
+    ...
+  }: {
     programs.firefox = {
       enable = true;
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
+
+      # Lock-down policies. Search engines are intentionally NOT here —
+      # mixing policies.SearchEngines.* with profiles.<n>.search.engines
+      # produces conflicting state. Engines live in the profile below.
       policies = {
         AutofillAddressEnabled = false;
         AutofillCreditCardEnabled = false;
-        # Cookies.Behavior = "reject-tracker-and-partition-foreign";
-        # DisableBuiltinPDFViewer = true;
         DisableFirefoxAccounts = true;
         DisableFirefoxStudies = true;
         DisableFormHistory = true;
@@ -21,8 +28,6 @@
         DisableSetDesktopBackground = true;
         DisableTelemetry = true;
         DisplayBookmarksToolbar = "newtab";
-        # DisplayMenuBar = "default-off";
-        # DNSOverHTTPS.Enabled = false;
         EnableTrackingProtection = {
           Category = "strict";
           Cryptomining = true;
@@ -31,22 +36,27 @@
           SuspectedFingerprinting = true;
           Value = true;
         };
-        # EncryptedMediaExtensions.Enabled = true;
         ExtensionSettings = {
+          # uBlock Origin
           "uBlock0@raymondhill.net" = {
             installation_mode = "force_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
             private_browsing = true;
+            default_area = "navbar";
           };
+          # Bitwarden
           "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
             installation_mode = "force_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
             private_browsing = true;
+            default_area = "navbar";
           };
+          # Vimium
           "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
             installation_mode = "force_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/vimium-ff/latest.xpi";
             private_browsing = true;
+            default_area = "navbar";
           };
         };
         FirefoxHome = {
@@ -70,139 +80,149 @@
         OverrideFirstRunPage = "";
         OverridePostUpdatePage = "";
         PasswordManagerEnabled = false;
-        # Permissions = {
-        #   Autoplay.Default = "block-audio";
-        #   Camera.BlockNewRequests = true;
-        #   Location.BlockNewRequests = true;
-        #   Microphone.BlockNewRequests = true;
-        #   Notifications.BlockNewRequests = true;
-        #   ScreenShare.BlockNewRequests = true;
-        #   VirtualReality.BlockNewRequests = true;
-        # };
         PictureInPicture.Enabled = true;
         PopupBlocking.Default = true;
         PrimaryPassword = false;
         SearchBar = "unified";
-        SearchEngines.Add = [
-          {
-            Name = "Kagi";
-            Alias = "@k";
-            URLTemplate = "https://kagi.com/search?q={searchTerms}";
-            IconURL = "https://kagi.com/asset/6320cc1/kagi_assets/logos/search.svg";
-          }
-          {
-            Name = "Arch Wiki";
-            Alias = "@aw";
-            URLTemplate = "https://wiki.archlinux.org/index.php?search={searchTerms}";
-            IconURL = "https://wiki.archlinux.org/favicon.ico";
-          }
-          {
-            Name = "Docker Hub";
-            Alias = "@dh";
-            URLTemplate = "https://hub.docker.com/search?q={searchTerms}";
-            IconURL = "https://hub.docker.com/favicon.ico";
-          }
-          {
-            Name = "Flathub";
-            Alias = "@fh";
-            URLTemplate = "https://flathub.org/apps/search?q={searchTerms}";
-            IconURL = "https://flathub.org/favicon.png";
-          }
-          {
-            Name = "GitHub";
-            Alias = "@gh";
-            URLTemplate = "https://github.com/search?q={searchTerms}";
-            IconURL = "https://github.com/favicon.ico";
-          }
-          {
-            Name = "Home Manager";
-            Alias = "@hm";
-            URLTemplate = "https://home-manager-options.extranix.com/?query={searchTerms}&release=release-25.11";
-            IconURL = "https://home-manager-options.extranix.com/images/favicon.png";
-          }
-          {
-            Name = "NixOS Options";
-            Alias = "@no";
-            URLTemplate = "https://search.nixos.org/options?channel=25.11&query={searchTerms}";
-            IconURL = "https://search.nixos.org/favicon.png";
-          }
-          {
-            Name = "NixOS Packages";
-            Alias = "@np";
-            URLTemplate = "https://search.nixos.org/packages?channel=25.11&query={searchTerms}";
-            IconURL = "https://search.nixos.org/favicon.png";
-          }
-          {
-            Name = "NixOS Wiki";
-            Alias = "@nw";
-            URLTemplate = "https://wiki.nixos.org/w/index.php?search={searchTerms}";
-            IconURL = "https://wiki.nixos.org/favicon.ico";
-          }
-          {
-            Name = "ProtonDB";
-            Alias = "@pd";
-            URLTemplate = "https://www.protondb.com/search?q={searchTerms}";
-            IconURL = "https://www.protondb.com/favicon.ico";
-          }
-          {
-            Name = "Reddit";
-            Alias = "@rd";
-            URLTemplate = "https://www.reddit.com/search/?q={searchTerms}";
-            IconURL = "https://www.reddit.com/favicon.ico";
-          }
-          {
-            Name = "Stack Overflow";
-            Alias = "@so";
-            URLTemplate = "https://stackoverflow.com/search?q={searchTerms}";
-            IconURL = "https://stackoverflow.com/favicon.ico";
-          }
-          {
-            Name = "Wikipedia";
-            Alias = "@wk";
-            URLTemplate = "https://en.wikipedia.org/wiki/Special:Search?search={searchTerms}";
-            IconURL = "https://en.wikipedia.org/static/favicon/wikipedia.ico";
-          }
-        ];
-        SearchEngines.Remove = [
-          "Amazon.com"
-          "Bing"
-          "eBay"
-          "Perplexity"
-          "Wikipedia (en)"
-        ];
-        SearchEngines.Default = "Kagi";
         SearchSuggestEnabled = false;
-        # ShowHomeButton = true;
         SkipTermsOfUse = true;
-        # TranslateEnabled = true;
       };
+
       profiles.default = {
         isDefault = true;
 
         settings = {
-          # Enable the new sidebar framework
+          "general.autoScroll" = true;
+          "nimbus.rollouts.enabled" = false;
           "sidebar.revamp" = true;
-
-          # Turn on vertical tabs natively
           "sidebar.verticalTabs" = true;
-
-          # Optional: Force the sidebar to always be visible on startup
-          "sidebar.visibility" = "always";
-
-          # Resume previous browser session
+          "sidebar.visibility" = "always-show";
           "browser.startup.page" = 3;
-
-          # Optional: Warn when quitting a window with multiple tabs
           "browser.tabs.warnOnClose" = true;
-
-          # Remove "View recent browsing..." (Firefox View)
           "browser.tabs.firefox-view" = false;
-
-          # Remove "List all tabs" (The dropdown arrow)
           "browser.tabs.tabmanager.enabled" = false;
-
-          # Disable Firefox's native window controls
           "browser.tabs.inTitlebar" = 0;
+          "browser.ai.control.default" = "blocked";
+          "browser.ai.control.smartTabGroups" = "enabled";
+
+          "browser.uiCustomization.state" = builtins.toJSON {
+            placements = {
+              widget-overflow-fixed-list = [];
+              unified-extensions-area = [];
+              nav-bar = [
+                "back-button"
+                "forward-button"
+                "stop-reload-button"
+                "urlbar-container"
+                "unified-extensions-button"
+                "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action" # Bitwarden
+                "ublock0_raymondhill_net-browser-action" # uBlock
+                "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action" # Vimium
+                "downloads-button"
+              ];
+              toolbar-menubar = ["menubar-items"];
+              TabsToolbar = [];
+              vertical-tabs = ["tabbrowser-tabs"];
+              PersonalToolbar = ["personal-bookmarks"];
+            };
+            seen = [
+              "developer-button"
+              "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
+              "ublock0_raymondhill_net-browser-action"
+              "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action"
+              "screenshot-button"
+              "stop-reload-button"
+            ];
+            dirtyAreaCache = ["nav-bar" "TabsToolbar" "vertical-tabs"];
+            currentVersion = 23;
+            newElementCount = 0;
+          };
+        };
+
+        search = {
+          force = true; # prevents Firefox from overwriting search engines
+          default = "kagi";
+
+          engines = {
+            kagi = {
+              name = "Kagi";
+              urls = [{template = "https://kagi.com/search?q={searchTerms}";}];
+              iconMapObj."16" = "https://kagi.com/asset/6320cc1/kagi_assets/logos/search.svg";
+              definedAliases = ["@k"];
+            };
+            arch-wiki = {
+              name = "Arch Wiki";
+              urls = [{template = "https://wiki.archlinux.org/index.php?search={searchTerms}";}];
+              iconMapObj."16" = "https://wiki.archlinux.org/favicon.ico";
+              definedAliases = ["@aw"];
+            };
+            docker-hub = {
+              name = "Docker Hub";
+              urls = [{template = "https://hub.docker.com/search?q={searchTerms}";}];
+              iconMapObj."16" = "https://hub.docker.com/favicon.ico";
+              definedAliases = ["@dh"];
+            };
+            flathub = {
+              name = "Flathub";
+              urls = [{template = "https://flathub.org/apps/search?q={searchTerms}";}];
+              iconMapObj."16" = "https://flathub.org/favicon.png";
+              definedAliases = ["@fh"];
+            };
+            github = {
+              name = "GitHub";
+              urls = [{template = "https://github.com/search?q={searchTerms}";}];
+              iconMapObj."16" = "https://github.com/favicon.ico";
+              definedAliases = ["@gh"];
+            };
+            home-manager = {
+              name = "Home Manager";
+              urls = [{template = "https://home-manager-options.extranix.com/?query={searchTerms}&release=release-25.11";}];
+              iconMapObj."16" = "https://home-manager-options.extranix.com/images/favicon.png";
+              definedAliases = ["@hm"];
+            };
+            nixos-options = {
+              name = "NixOS Options";
+              urls = [{template = "https://search.nixos.org/options?channel=25.11&query={searchTerms}";}];
+              iconMapObj."16" = "https://search.nixos.org/favicon.png";
+              definedAliases = ["@no"];
+            };
+            nixos-packages = {
+              name = "NixOS Packages";
+              urls = [{template = "https://search.nixos.org/packages?channel=25.11&query={searchTerms}";}];
+              iconMapObj."16" = "https://search.nixos.org/favicon.png";
+              definedAliases = ["@np"];
+            };
+            nixos-wiki = {
+              name = "NixOS Wiki";
+              urls = [{template = "https://wiki.nixos.org/w/index.php?search={searchTerms}";}];
+              iconMapObj."16" = "https://wiki.nixos.org/favicon.ico";
+              definedAliases = ["@nw"];
+            };
+            protondb = {
+              name = "ProtonDB";
+              urls = [{template = "https://www.protondb.com/search?q={searchTerms}";}];
+              iconMapObj."16" = "https://www.protondb.com/favicon.ico";
+              definedAliases = ["@pd"];
+            };
+            reddit = {
+              name = "Reddit";
+              urls = [{template = "https://www.reddit.com/search/?q={searchTerms}";}];
+              iconMapObj."16" = "https://www.reddit.com/favicon.ico";
+              definedAliases = ["@rd"];
+            };
+            stackoverflow = {
+              name = "Stack Overflow";
+              urls = [{template = "https://stackoverflow.com/search?q={searchTerms}";}];
+              iconMapObj."16" = "https://stackoverflow.com/favicon.ico";
+              definedAliases = ["@so"];
+            };
+
+            # Hide built search engines
+            "amazondotcom-us".metaData.hidden = true;
+            "bing".metaData.hidden = true;
+            "ebay".metaData.hidden = true;
+            "perplexity".metaData.hidden = true;
+          };
         };
       };
     };
