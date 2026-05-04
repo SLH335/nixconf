@@ -11,6 +11,7 @@
       locale
       nh
       packages
+      sshServer
 
       ### SHELL ###
       zsh
@@ -25,6 +26,7 @@
       theme
 
       ### APPS ###
+      ghostty
 
       ### DEV ###
       neovim
