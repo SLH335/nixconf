@@ -13,6 +13,7 @@
       packages
       openrgb
       sshFleet
+      sshServer
       usb
 
       ### SHELL ###

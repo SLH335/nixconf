@@ -14,10 +14,7 @@
     addresses = ["slh-laptop"];
     authorizesRoles = ["desktop"];
 
-    # TODO: capture on this host with `cat /etc/ssh/ssh_host_ed25519_key.pub`
-    publicKey = null;
-
-    # TODO: paste from `cat ~/.ssh/id_ed25519_sk.pub` (Nitrokey)
-    # userKeys.slh = "sk-ssh-ed25519@openssh.com AAAA...";
+    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFfhquVvnvr7KPsk3qyf/WCjgO5qMZzlBHUmvi4c3B4h root@slh-laptop";
+    userKeys.slh = "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIOYpOpVqkkH4ggKrowAumvkKqHvGD25R8kP7VRl3uneuAAAABHNzaDo= slh@slh.dev";
   };
 }
