@@ -1,12 +1,8 @@
 {self, ...}: {
   flake.modules.nixos.firefox = {
-    pkgs,
-    config,
-    ...
-  }: {
     # environment.systemPackages = [pkgs.firefox];
 
-    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.firefox;
+    slh.userHomeModules.firefox = self.modules.homeManager.firefox;
   };
 
   flake.modules.homeManager.firefox = {

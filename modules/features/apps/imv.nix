@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.modules.nixos.imv = {config, ...}: {
-    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.imv;
+  flake.modules.nixos.imv = {
+    slh.userHomeModules.imv = self.modules.homeManager.imv;
   };
 
   flake.modules.homeManager.imv = {...}: {

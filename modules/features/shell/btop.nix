@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.modules.nixos.btop = {config, ...}: {
-    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.btop;
+  flake.modules.nixos.btop = {
+    slh.userHomeModules.btop = self.modules.homeManager.btop;
   };
 
   flake.modules.homeManager.btop = {

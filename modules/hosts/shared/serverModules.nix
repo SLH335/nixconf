@@ -2,12 +2,10 @@
   flake.modules.nixos.serverModules = {
     imports = with self.modules.nixos; [
       ### SYSTEM ###
-      primaryUser
+      userSlh
       nix
       bootloader
       networking
-      user
-      home
       locale
       nh
       packages

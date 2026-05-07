@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.modules.nixos.mpv = {config, ...}: {
-    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.mpv;
+  flake.modules.nixos.mpv = {
+    slh.userHomeModules.mpv = self.modules.homeManager.mpv;
   };
 
   flake.modules.homeManager.mpv = {

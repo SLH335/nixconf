@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.modules.nixos.yazi = {config, ...}: {
-    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.yazi;
+  flake.modules.nixos.yazi = {
+    slh.userHomeModules.yazi = self.modules.homeManager.yazi;
   };
 
   flake.modules.homeManager.yazi = {pkgs, ...}: {

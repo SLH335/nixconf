@@ -2,12 +2,10 @@
   flake.modules.nixos.desktopModules = {
     imports = with self.modules.nixos; [
       ### SYSTEM ###
-      primaryUser
+      userSlh
       nix
       bootloader
       networking
-      user
-      home
       audio
       locale
       keyring

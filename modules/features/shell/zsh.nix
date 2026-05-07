@@ -1,8 +1,8 @@
 {self, ...}: {
-  flake.modules.nixos.zsh = {config, ...}: {
+  flake.modules.nixos.zsh = {
     programs.zsh.enable = true;
 
-    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.zsh;
+    slh.userHomeModules.zsh = self.modules.homeManager.zsh;
   };
 
   flake.modules.homeManager.zsh = {

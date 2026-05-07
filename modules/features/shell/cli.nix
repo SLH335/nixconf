@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.modules.nixos.cli = {config, ...}: {
-    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.cli;
+  flake.modules.nixos.cli = {
+    slh.userHomeModules.cli = self.modules.homeManager.cli;
   };
 
   flake.modules.homeManager.cli = {pkgs, ...}: {

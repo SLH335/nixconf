@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.modules.nixos.atuin = {config, ...}: {
-    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.atuin;
+  flake.modules.nixos.atuin = {
+    slh.userHomeModules.atuin = self.modules.homeManager.atuin;
   };
 
   flake.modules.homeManager.atuin = {...}: {

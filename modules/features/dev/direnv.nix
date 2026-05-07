@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.modules.nixos.direnv = {config, ...}: {
-    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.direnv;
+  flake.modules.nixos.direnv = {
+    slh.userHomeModules.direnv = self.modules.homeManager.direnv;
   };
 
   flake.modules.homeManager.direnv = {

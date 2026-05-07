@@ -1,6 +1,6 @@
 {self, ...}: {
-  flake.modules.nixos.zellij = {config, ...}: {
-    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.zellij;
+  flake.modules.nixos.zellij = {
+    slh.userHomeModules.zellij = self.modules.homeManager.zellij;
   };
 
   flake.modules.homeManager.zellij = {...}: {

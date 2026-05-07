@@ -3,8 +3,8 @@
   inputs,
   ...
 }: {
-  flake.modules.nixos.apps = {config, ...}: {
-    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.apps;
+  flake.modules.nixos.apps = {
+    slh.userHomeModules.apps = self.modules.homeManager.apps;
   };
 
   flake.modules.homeManager.apps = {pkgs, ...}: {

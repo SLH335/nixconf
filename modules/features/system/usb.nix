@@ -1,8 +1,8 @@
 {self, ...}: {
-  flake.modules.nixos.usb = {config, ...}: {
+  flake.modules.nixos.usb = {
     services.udisks2.enable = true;
 
-    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.usb;
+    slh.userHomeModules.usb = self.modules.homeManager.usb;
   };
 
   flake.modules.homeManager.usb = {

@@ -1,25 +1,22 @@
 {self, ...}: {
   flake.modules.nixos.isoConfiguration = {modulesPath, ...}: {
-    # installation-cd-minimal.nix already provides bootloader, nixos
-    # user with autologin, basic networking, locale, base packages.
-    # Don't import system-level modules (bootloader, user, networking,
-    # locale, etc.) — they conflict with the ISO defaults. Don't import
-    # serverModules here either: imports must be unique paths through
-    # the module graph, or flake-module dedup fails (nvf, etc.).
+    # installation-cd-minimal.nix already provides bootloader, the
+    # nixos user with autologin, basic networking, locale, and base
+    # packages. Don't import system-level modules that conflict with
+    # those defaults (bootloader, networking, locale, etc.). Don't
+    # import serverModules either: imports must be unique paths
+    # through the module graph, or flake-module dedup fails (nvf).
+    #
+    # userIso supplies the slh.primaryUser = "nixos" binding so
+    # feature modules' userHomeModules entries (if/when ISO opts in
+    # to a home-manager-bearing user module) target the right account.
+    # Today userIso is home-manager-free: the live overlayfs has been
+    # known to drop home-manager-nixos.service into emergency on boot.
     imports = [
       "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
 
       ### SYSTEM ###
-      # primaryUser exposes the slh.primaryUser option (set below to
-      # "nixos" to retarget all home-manager bindings); home wires up
-      # home-manager-as-NixOS-module so those bindings actually apply.
-      self.modules.nixos.primaryUser
-      # `home` disabled on the ISO: home-manager-nixos.service is
-      # wantedBy multi-user.target, and if activation fails on the
-      # live overlayfs (write quirks, no XDG_RUNTIME_DIR before login,
-      # etc.) systemd drops to emergency / a recovery shell. Re-enable
-      # if/when the ISO needs home-manager.
-      # self.modules.nixos.home
+      self.modules.nixos.userIso
 
       ### SHELL ###
       # self.modules.nixos.zsh
@@ -37,11 +34,6 @@
       self.modules.nixos.neovim
       # self.modules.nixos.git
     ];
-    # nixpkgs.hostPlatform = "x86_64-linux";
-
-    # Retarget all home-manager.users.<n> bindings from the default
-    # "slh" to the auto-created "nixos" user on the live ISO.
-    slh.primaryUser = "nixos";
 
     networking.hostName = "slh-nixos";
 

@@ -3,17 +3,13 @@
   inputs,
   ...
 }: {
-  flake.modules.nixos.niri = {
-    pkgs,
-    config,
-    ...
-  }: {
+  flake.modules.nixos.niri = {pkgs, ...}: {
     programs.niri = {
       enable = true;
       package = self.packages.${pkgs.stdenv.hostPlatform.system}.niri;
     };
 
-    home-manager.users.${config.slh.primaryUser} = self.modules.homeManager.niri;
+    slh.userHomeModules.niri = self.modules.homeManager.niri;
   };
 
   flake.modules.homeManager.niri = {pkgs, ...}: {
