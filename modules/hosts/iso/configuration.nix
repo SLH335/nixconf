@@ -43,16 +43,6 @@
     # "slh" to the auto-created "nixos" user on the live ISO.
     slh.primaryUser = "nixos";
 
-    # Copy the entire squashfs into a tmpfs at stage 1, then unmount
-    # the original medium. Required when booting via Ventoy: the
-    # virtual loop device Ventoy presents triggers SquashFS read
-    # errors at runtime ("unable to read fragment cache entry"),
-    # which corrupts /sysroot during switch_root and drops to a
-    # recovery shell. The official minimal ISO doesn't hit this just
-    # because it's small enough to read cleanly. Trade-off: the ISO
-    # contents must fit in RAM (~1-3 GB depending on what's bundled).
-    boot.kernelParams = ["copytoram"];
-
     networking.hostName = "slh-nixos";
 
     # This option defines the first version of NixOS you have installed on this particular machine,

@@ -14,6 +14,7 @@
       nh
       packages
       openrgb
+      usb
 
       ### SHELL ###
       zsh
