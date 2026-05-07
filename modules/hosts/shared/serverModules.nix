@@ -9,6 +9,7 @@
       locale
       nh
       packages
+      sshFleet
       sshServer
 
       ### SHELL ###

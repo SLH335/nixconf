@@ -12,6 +12,7 @@
       nh
       packages
       openrgb
+      sshFleet
       usb
 
       ### SHELL ###
