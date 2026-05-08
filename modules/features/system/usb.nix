@@ -16,7 +16,7 @@
         # workaround for
         # https://github.com/nix-community/home-manager/issues/632
         program_options = {
-          file_manager = "${lib.getExe pkgs.ghostty} -e ${lib.getExe pkgs.yazi}";
+          file_manager = "${lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.ghostty} -e ${lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.yazi}";
         };
       };
     };

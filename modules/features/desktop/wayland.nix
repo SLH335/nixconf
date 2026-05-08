@@ -16,7 +16,18 @@
 
       config = {
         common.default = ["gnome" "gtk"];
-        niri.default = ["gnome" "gtk"];
+        niri = {
+          default = ["gnome" "gtk"];
+          # Route OpenURI and AppChooser to gtk under niri. gnome's
+          # implementation can't position its chooser dialog without a
+          # gnome-shell parent ("Failed to associate portal window with
+          # parent window") and its launch path strips WAYLAND_DISPLAY,
+          # so gnome-launched GUI apps silently fall through to X11
+          # ("Failed to create window"). gtk's portal is desktop-agnostic
+          # and inherits the env correctly.
+          "org.freedesktop.impl.portal.OpenURI" = ["gtk"];
+          "org.freedesktop.impl.portal.AppChooser" = ["gtk"];
+        };
       };
     };
 

@@ -1,85 +1,24 @@
 {self, ...}: {
-  flake.modules.nixos.yazi = {
-    slh.userHomeModules.yazi = self.modules.homeManager.yazi;
-  };
-
-  flake.modules.homeManager.yazi = {pkgs, ...}: {
-    catppuccin.yazi.enable = true;
-
-    # Install optional tools Yazi relies on for rich previews
-    home.packages = with pkgs; [
-      ffmpegthumbnailer # Video thumbnails
-      p7zip # Archive extraction and previews
-      jq # JSON previews
-      poppler-utils # PDF previews
-      fd # Fast file searching
-      ripgrep # Fast file content searching
-      fzf # Fuzzy finding
+  flake.modules.nixos.yazi = {pkgs, ...}: {
+    environment.systemPackages = [
+      self.packages.${pkgs.stdenv.hostPlatform.system}.yazi
     ];
 
-    programs.yazi = {
-      enable = true;
-
-      enableZshIntegration = true;
-
-      # This explicitly assigns the wrapper alias to 'y'.
-      # Launching Yazi with 'y' will ensure that when you quit, your terminal
-      # changes its directory to wherever you left off in Yazi!
-      shellWrapperName = "y";
-
-      # Sensible UI and behavior defaults
-      settings = {
-        manager = {
-          show_hidden = true;
-          sort_by = "natural";
-          sort_dir_first = true;
-          sort_reverse = false;
-          linemode = "size";
-          show_symlink = true;
-          ratio = [1 4 3]; # Panel width ratios: parent, current, preview
-        };
-        preview = {
-          max_width = 1000;
-          max_height = 1000;
-          image_filter = "lanczos3";
-          image_quality = 90;
-        };
-      };
-
-      # Declaratively inject official Yazi plugins from Nixpkgs
-      plugins = {
-        full-border = pkgs.yaziPlugins.full-border;
-        smart-enter = pkgs.yaziPlugins.smart-enter;
-      };
-
-      # Initialize the Lua plugins that require it
-      initLua = ''
-        require("full-border"):setup()
+    slh.userHomeModules.yazi = {pkgs, ...}: {
+      # `y` shell wrapper: launches yazi, captures cwd on exit, and cd's
+      # the parent shell to that directory. Lives in HM because zshrc is
+      # the only place this hook is meaningful — wrapper can't inject
+      # functions into the user's shell environment.
+      programs.zsh.initContent = ''
+        function y() {
+          local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+          ${pkgs.lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.yazi} "$@" --cwd-file="$tmp"
+          if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+            builtin cd -- "$cwd"
+          fi
+          rm -f -- "$tmp"
+        }
       '';
-
-      # Keybindings
-      keymap = {
-        manager.prepend_keymap = [
-          # Easy escape
-          {
-            run = "close";
-            on = ["<C-q>"];
-            desc = "Close Yazi";
-          }
-
-          # Smart enter (plugin) - open file or enter dir with single key
-          {
-            run = "plugin smart-enter";
-            on = ["l"];
-            desc = "Enter the child directory, or open the file";
-          }
-          {
-            run = "plugin smart-enter";
-            on = ["<Enter>"];
-            desc = "Enter the child directory, or open the file";
-          }
-        ];
-      };
     };
   };
 }

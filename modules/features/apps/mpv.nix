@@ -1,69 +1,21 @@
 {self, ...}: {
-  flake.modules.nixos.mpv = {
-    slh.userHomeModules.mpv = self.modules.homeManager.mpv;
-  };
+  flake.modules.nixos.mpv = {pkgs, ...}: {
+    environment.systemPackages = [
+      self.packages.${pkgs.stdenv.hostPlatform.system}.mpv
+    ];
 
-  flake.modules.homeManager.mpv = {
-    programs.mpv = {
-      enable = true;
-
-      # MPV Configuration (mpv.conf)
-      config = {
-        # Modern high-quality video rendering
-        profile = "gpu-hq";
-        vo = "gpu-next";
-
-        # Force Wayland natively
-        gpu-context = "wayland";
-
-        # Enable hardware decoding for smooth playback and low CPU usage
-        hwdec = "auto-safe";
-
-        # Don't close the window instantly when the video finishes playing
-        keep-open = "yes";
-
-        # Save video position on quit
-        save-position-on-quit = "yes";
+    # mpv-as-default for video MIME types. Lives in HM because
+    # xdg.mimeApps writes to ~/.config/mimeapps.list which is per-user
+    # state — nothing the wrapper can express.
+    slh.userHomeModules.mpv = {...}: {
+      xdg.mimeApps.defaultApplications = {
+        "video/mp4" = "mpv.desktop";
+        "video/x-matroska" = "mpv.desktop"; # .mkv
+        "video/webm" = "mpv.desktop";
+        "video/quicktime" = "mpv.desktop"; # .mov
+        "video/x-flv" = "mpv.desktop";
+        "video/x-msvideo" = "mpv.desktop"; # .avi
       };
-
-      profiles = {
-        "dont-save-at-end" = {
-          # This condition becomes true the exact millisecond the video finishes
-          profile-cond = "eof_reached";
-
-          # Override the global setting so it doesn't write to the history file
-          save-position-on-quit = "no";
-        };
-      };
-
-      # Custom Keybindings (input.conf)
-      bindings = {
-        # Vim-style seeking and volume control
-        "h" = "seek -5";
-        "l" = "seek 5";
-        "j" = "add volume -2";
-        "k" = "add volume 2";
-
-        # Shift variants for larger jumps
-        "H" = "seek -60";
-        "L" = "seek 60";
-
-        # Quick quit
-        "q" = "quit";
-        "<Escape>" = "quit";
-
-        # Toggle fullscreen
-        "f" = "cycle fullscreen";
-      };
-    };
-
-    xdg.mimeApps.defaultApplications = {
-      "video/mp4" = "mpv.desktop";
-      "video/x-matroska" = "mpv.desktop"; # .mkv files
-      "video/webm" = "mpv.desktop";
-      "video/quicktime" = "mpv.desktop"; # .mov files
-      "video/x-flv" = "mpv.desktop";
-      "video/x-msvideo" = "mpv.desktop"; # .avi files
     };
   };
 }

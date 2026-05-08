@@ -8,6 +8,7 @@
     catppuccin.lsd.enable = true;
 
     home.packages = with pkgs; [
+      fzf
       wget
       ripgrep
       dust

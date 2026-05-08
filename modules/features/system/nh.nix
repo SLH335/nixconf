@@ -1,8 +1,4 @@
-{
-  self,
-  inputs,
-  ...
-}: {
+{self, ...}: {
   flake.modules.nixos.nh = {pkgs, ...}: {
     programs.nh = {
       enable = true;
@@ -13,14 +9,6 @@
         dates = "weekly";
         extraArgs = "--keep 10 --keep-since 30d";
       };
-    };
-  };
-
-  perSystem = {pkgs, ...}: {
-    packages.nh = inputs.wrapper-modules.lib.wrapPackage {
-      inherit pkgs;
-      package = pkgs.nh;
-      envDefault.NH_FLAKE = "/etc/nixos";
     };
   };
 }
