@@ -212,7 +212,7 @@
       "telemetryEnabled": false,
       "enableLockScreenCountdown": true,
       "lockScreenCountdownDuration": 10000,
-      "autoStartAuth": true,
+      "autoStartAuth": false,
       "allowPasswordWithFprintd": false,
       "clockStyle": "custom",
       "clockFormat": "hh\nmm",

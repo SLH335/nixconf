@@ -7,6 +7,7 @@
 
       self.modules.nixos.bluetooth
       self.modules.nixos.power
+      self.modules.nixos.howdy
     ];
 
     networking.hostName = "slh-laptop";
