@@ -20,6 +20,7 @@
       nerd-fonts.jetbrains-mono
       pdfarranger
       networkmanagerapplet
+      anki
 
       inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
