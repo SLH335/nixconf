@@ -34,7 +34,7 @@
     programs.ssh = {
       matchBlocks."github.com" = {
         user = "git";
-        identityFile = "~/.ssh/id_ed25519_sk";
+        # identityFile = "~/.ssh/id_ed25519_sk";
         identitiesOnly = true;
 
         extraOptions = {
