@@ -30,7 +30,6 @@
       ### DEV ###
       neovim
       git
-      direnv
       docker
       # devTools
 
