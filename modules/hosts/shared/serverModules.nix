@@ -32,7 +32,7 @@
       git
       direnv
       docker
-      devTools
+      # devTools
 
       ### GAMING ###
     ];

@@ -1,12 +1,12 @@
 {self, ...}: {
-  flake.modules.nixos.serverConfiguration = {...}: {
+  flake.modules.nixos.serverNetConfiguration = {...}: {
     imports = [
-      self.modules.nixos.serverHardwareConfiguration
+      self.modules.nixos.serverNetHardwareConfiguration
 
       self.modules.nixos.serverModules
     ];
 
-    networking.hostName = "slh-server";
+    networking.hostName = "slh-net";
 
     # This option defines the first version of NixOS you have installed on this particular machine,
     # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
